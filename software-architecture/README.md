@@ -1,8 +1,12 @@
-# software-architecture
+# `software-architecture`
 
-Architecture-first routing skill for designing, structuring, and refactoring software systems.
+> Architecture-first routing skill for designing, structuring, and refactoring software systems.
 
-## Purpose
+![Focus](https://img.shields.io/badge/focus-architecture-blue)
+![Method](https://img.shields.io/badge/method-boundaries--first-2ea44f)
+![Anti-pattern](https://img.shields.io/badge/guardrail-overengineering-red)
+
+## When To Use
 
 Use this skill when a task involves:
 
@@ -16,7 +20,17 @@ Use this skill when a task involves:
 
 First define business capabilities, responsibility boundaries, and dependency direction. Only then choose patterns or abstractions.
 
-The skill deliberately does not apply every methodology to every task. It routes to the most relevant specialized skill when a concern such as testing, API design, or observability becomes relevant.
+```text
+Business / Domain
+        ↓
+Responsibility Boundaries
+        ↓
+Dependency Direction
+        ↓
+Simplest Sufficient Design
+        ↓
+Pattern (only when justified)
+```
 
 ## Abstraction Rule
 
@@ -34,16 +48,24 @@ Otherwise prefer direct code, explicit functions, and small cohesive modules.
 
 | Concern | Skill |
 |---|---|
-| Deployment, configuration, process lifecycle | `12-factor` |
-| Layering and dependency direction | `clean-architecture` |
-| Responsibility and coupling | `solid` |
-| Repeated interaction or construction problem | `design-patterns` |
-| Bounded contexts, aggregates, domain language | `domain-driven-design` |
-| Verification strategy and test boundaries | `testing` |
-| Public contracts and versioning | `api-design` |
-| Failure modes and recovery | `error-handling` |
-| Logs, metrics, traces, and alerts | `observability` |
-| Diff, PR, and merge readiness review | `engineering-code-review` |
+| Deployment, configuration, process lifecycle | [`12-factor`](../12-factor/) |
+| Layering and dependency direction | [`clean-architecture`](../clean-architecture/) |
+| Responsibility and coupling | [`solid`](../solid/) |
+| Repeated interaction or construction problem | [`design-patterns`](../design-patterns/) |
+| Bounded contexts, aggregates, domain language | [`domain-driven-design`](../domain-driven-design/) |
+| Verification strategy and test boundaries | [`testing`](../testing/) |
+| Public contracts and versioning | [`api-design`](../api-design/) |
+| Failure modes and recovery | [`error-handling`](../error-handling/) |
+| Logs, metrics, traces, and alerts | [`observability`](../observability/) |
+| Diff, PR, and merge readiness review | [`engineering-code-review`](../code-review/) |
+
+## Complexity Guardrails
+
+- A CRUD-only feature does not need a full use-case/adapter stack.
+- Do not create an interface for a single implementation unless it is replaced or isolated for testing.
+- Do not split a module only to satisfy a layer diagram.
+- Do not introduce dependency-injection machinery for a small standalone program.
+- Do not promote a local utility to a shared library until a second consumer exists.
 
 ## Usage
 
