@@ -1,7 +1,8 @@
 # `software-architecture`
 
-> Architecture-first routing skill for designing, structuring, and refactoring software systems.
+> Parent architecture skill with ten specialized subskills.
 
+![Type](https://img.shields.io/badge/type-parent_skill-111827)
 ![Focus](https://img.shields.io/badge/focus-architecture-blue)
 ![Method](https://img.shields.io/badge/method-boundaries--first-2ea44f)
 ![Anti-pattern](https://img.shields.io/badge/guardrail-overengineering-red)
@@ -44,20 +45,20 @@ Introduce an abstraction only when at least one condition is true:
 
 Otherwise prefer direct code, explicit functions, and small cohesive modules.
 
-## Routing
+## Subskill Routing
 
-| Concern | Skill |
+| Concern | Subskill |
 |---|---|
-| Deployment, configuration, process lifecycle | [`12-factor`](../12-factor/) |
-| Layering and dependency direction | [`clean-architecture`](../clean-architecture/) |
-| Responsibility and coupling | [`solid`](../solid/) |
-| Repeated interaction or construction problem | [`design-patterns`](../design-patterns/) |
-| Bounded contexts, aggregates, domain language | [`domain-driven-design`](../domain-driven-design/) |
-| Verification strategy and test boundaries | [`testing`](../testing/) |
-| Public contracts and versioning | [`api-design`](../api-design/) |
-| Failure modes and recovery | [`error-handling`](../error-handling/) |
-| Logs, metrics, traces, and alerts | [`observability`](../observability/) |
-| Diff, PR, and merge readiness review | [`engineering-code-review`](../code-review/) |
+| Deployment, configuration, process lifecycle | [`12-factor`](./12-factor/) |
+| Layering and dependency direction | [`clean-architecture`](./clean-architecture/) |
+| Responsibility and coupling | [`solid`](./solid/) |
+| Repeated interaction or construction problem | [`design-patterns`](./design-patterns/) |
+| Bounded contexts, aggregates, domain language | [`domain-driven-design`](./domain-driven-design/) |
+| Verification strategy and test boundaries | [`testing`](./testing/) |
+| Public contracts and versioning | [`api-design`](./api-design/) |
+| Failure modes and recovery | [`error-handling`](./error-handling/) |
+| Logs, metrics, traces, and alerts | [`observability`](./observability/) |
+| Diff, PR, and merge readiness review | [`engineering-code-review`](./code-review/) |
 
 ## Complexity Guardrails
 
@@ -69,10 +70,16 @@ Otherwise prefer direct code, explicit functions, and small cohesive modules.
 
 ## Usage
 
-Copy this directory into your Codex skills directory:
+Install the parent and all subskills:
 
 ```bash
 cp -R software-architecture ~/.codex/skills/
+```
+
+If your runtime requires a flat skill list, copy each child directory next to `software-architecture`:
+
+```bash
+cp -R software-architecture/* ~/.codex/skills/
 ```
 
 The skill is automatically discovered through its `SKILL.md` frontmatter. Start a new agent task after installation so the skill list is refreshed.
