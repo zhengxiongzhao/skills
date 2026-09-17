@@ -1,23 +1,52 @@
-<div align="center">
+# AI Coding Agent Skills
 
-# Software Architecture Skills Pack
+**A focused, layered skills pack for Codex and other agent runtimes.**
 
-**A layered Agent Skill pack for architecture-first AI coding agents.**
-
-[![Skills](https://img.shields.io/badge/subskills-10-blue)](./software-architecture/#skills)
-[![Entry Point](https://img.shields.io/badge/entry_point-software--architecture-111827)](./software-architecture/)
+[![Skills](https://img.shields.io/badge/skills-11-blue)](#software-architecture)
+[![Subskills](https://img.shields.io/badge/subskills-10-blue)](#subskills)
 [![Format](https://img.shields.io/badge/Agent_Skill-SKILL.md-2ea44f)](https://agentskills.io/)
 [![Anti-overengineering](https://img.shields.io/badge/anti--overengineering-enabled-red)](#design-principles)
 
-[Overview](#overview) · [Structure](#structure) · [Quick Start](#quick-start) · [Design Principles](#design-principles)
-
-</div>
+[Overview](#overview) · [software-architecture](#software-architecture) · [Quick Start](#quick-start) · [Design Principles](#design-principles)
 
 ---
 
 ## Overview
 
-`software-architecture` is the parent skill. It owns the routing model, dependency-direction rules, and anti-overengineering guardrails. The ten specialized skills below it are loaded only when their concerns apply.
+This repository contains standalone **Agent Skills** that help AI coding agents make better engineering decisions.
+
+Each skill is a focused `SKILL.md` with explicit triggers, decision rules, and anti-patterns. `software-architecture` is the parent skill; the ten specialized skills under it are loaded only when their concerns apply.
+
+```text
+                         ┌───────────────────────────────────┐
+                         │       software-architecture       │
+                         │  parent skill + routing rules     │
+                         └──────────────────┬────────────────┘
+                                            │
+        ┌──────────────┬────────────────────┼────────────────────┬──────────────┐
+        │              │                    │                    │              │
+   Architecture      Domain           Quality Attributes     Operations      Review
+        │              │                    │                    │              │
+   12-factor      domain-driven        api-design          observability  engineering-
+   clean-arch       design             error-handling                    code-review
+   solid            design-patterns    testing
+```
+
+> **Core rule:** introduce an abstraction only for a real dependency boundary, a second implementation, test isolation, domain independence, or a meaningful business concept.
+
+---
+
+## software-architecture
+
+[`software-architecture`](./software-architecture/) is the parent skill and the entry point for architecture decisions. It defines:
+
+- Business capabilities and domain invariants first
+- Responsibility boundaries and dependency direction second
+- The simplest sufficient design before any pattern
+- Routing to specialized subskills only when their concerns apply
+- Explicit guardrails against speculative abstraction
+
+### Structure
 
 ```text
 software-architecture/
@@ -35,27 +64,6 @@ software-architecture/
 └── testing/
 ```
 
-> **Core rule:** introduce an abstraction only for a real dependency boundary, a second implementation, test isolation, domain independence, or a meaningful business concept.
-
----
-
-## Structure
-
-```text
-                         ┌───────────────────────────────────┐
-                         │       software-architecture       │
-                         │  parent skill + routing rules     │
-                         └──────────────────┬────────────────┘
-                                            │
-        ┌──────────────┬────────────────────┼────────────────────┬──────────────┐
-        │              │                    │                    │              │
-   Architecture      Domain           Quality Attributes     Operations      Review
-        │              │                    │                    │              │
-   12-factor      domain-driven        api-design          observability  engineering-
-   clean-arch       design             error-handling                    code-review
-   solid            design-patterns    testing
-```
-
 ### Subskills
 
 | Subskill | Focus | Triggered By |
@@ -70,6 +78,16 @@ software-architecture/
 | [`error-handling`](./software-architecture/error-handling/) | Failure behavior | Exceptions, result types, retries, degradation |
 | [`observability`](./software-architecture/observability/) | Operational visibility | Logs, metrics, traces, health checks, alerts |
 | [`engineering-code-review`](./software-architecture/code-review/) | Review discipline | Diff/PR review, severity, merge readiness |
+
+#### Theme Groups
+
+```text
+Architecture     12-factor · clean-architecture · solid · design-patterns
+Modeling         domain-driven-design
+Quality          testing · api-design · error-handling
+Operations       observability
+Process          engineering-code-review
+```
 
 ---
 
@@ -86,7 +104,8 @@ cp -R skills/software-architecture ~/.codex/skills/
 Install only the parent skill without its subskills:
 
 ```bash
-cp -R skills/software-architecture/SKILL.md ~/.codex/skills/software-architecture/
+mkdir -p ~/.codex/skills/software-architecture
+cp skills/software-architecture/SKILL.md ~/.codex/skills/software-architecture/
 ```
 
 Start a new Codex task after installation so the skill list is refreshed.
